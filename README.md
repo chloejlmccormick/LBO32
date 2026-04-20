@@ -33,8 +33,7 @@ python main.py
 ```
  
 4. Enter your deal assumptions when prompted. Example inputs for a realistic mid-market LBO:
-| Prompt | Example Value |
-|---|---|
+| Prompt, Example Value |
 | Purchase Price ($M), 100
 | Equity Invested ($M), 40
 | Starting Revenue ($M), 50
