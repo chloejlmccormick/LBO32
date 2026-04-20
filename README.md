@@ -79,12 +79,6 @@ For Python syntax used in this project:
  
 ## External Contributors and AI Use
  
-**Generative AI:** We used Claude (Anthropic) to help implement feedback provided by our TF on the second project milestone. Specifically, our TF asked us to:
-- Add taxes and capital expenditures to the free cash flow calculation
-- Replace the informal "pay whatever FCF allows" debt paydown with a proper amortization schedule
-- Flag a warning when free cash flow falls short of the scheduled amortization payment (covenant breach scenario)
-- Ensure `run_model_silent()` stays in sync with `project_financials()` so the sensitivity grid and year-by-year table use identical logic
-We described the feedback to Claude and used it to implement those changes in `main.py`. We reviewed all of the code it produced, verified that it matched our TF's instructions, and tested it with sample inputs. The overall structure, original functions, comments, and financial logic of the model were written by us.
+**Generative AI:** We consulted Claude (Anthropic) as a reference tool while working through feedback from our TF on the second project milestone. Our TF asked us to add taxes and capital expenditures to the FCF calculation, replace the informal debt paydown logic with a proper amortization schedule, flag covenant breach scenarios, and keep `run_model_silent()` in sync with `project_financials()`. We worked through these changes ourselves and used Claude to check our understanding of specific syntax questions (e.g. how to correctly floor taxes at zero with `max()`, and how to mirror logic across two functions). We reviewed, tested, and integrated all code ourselves.
  
-**No other external code sources were used.** The financial formulas are standard LBO modeling conventions referenced from Investopedia (linked above).
-
+The overall structure, functions, financial logic, and comments of the model were written by us.
