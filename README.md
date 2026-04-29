@@ -97,7 +97,19 @@ For Python syntax used in this project:
 - [Python Docs - random module](https://docs.python.org/3/library/random.html): reference for `random.uniform()` (used in `monte_carlo()`)
 
 ---
- 
+
+## Testing
+
+We verified the model is producing correct numbers in five ways:
+
+1. **Manual verification:** ran a clean scenario ($100M purchase price, $50M equity, $50M debt, flat $10M EBITDA, 0% growth, no taxes, no capex, no amortization) and confirmed the debt balance in each year matched hand calculations
+2. **Covenant breach edge case:** constructed a scenario with very high interest and capex that pushed FCF below the scheduled amortization payment and confirmed the warning printed correctly and the code used the scheduled payment rather than the insufficient FCF
+3. **Final year paydown:** confirmed that when remaining debt is less than the scheduled amortization, the program caps the payment at actual remaining debt and does not produce a negative balance (the `min(annual_amort, debt)` line)
+4. **Consistency check:** ran `project_financials()` and `run_model_silent()` side by side on five input sets and confirmed final EBITDA and final debt matched exactly each time — critical because the sensitivity analysis and Monte Carlo both depend on `run_model_silent()`
+5. **IRR formula check:** verified that at 1.0x MOIC the IRR returns 0%, and at 2.0x over 5 years the IRR returns approximately 14.9%, matching the expected value of `2^(1/5) - 1`
+
+---
+
 ## External Contributors and AI Use
  
 **Generative AI:** We consulted Claude (Anthropic) as a reference tool while working through feedback from our TF on the second project milestone. Our TF asked us to add taxes and capital expenditures to the FCF calculation, replace the informal debt paydown logic with a proper amortization schedule, flag covenant breach scenarios, keep `run_model_silent()` in sync with `project_financials()`, add broader input validation with cross-input checks, implement a Monte Carlo simulation with summary statistics, add CSV export, and split the project into three files. We worked through these changes ourselves and used Claude to check our understanding of specific syntax questions. We reviewed, tested, and integrated all code ourselves.
